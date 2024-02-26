@@ -148,7 +148,7 @@ interface NumeroPacientesPorEspecialidad {
 const contarPacientesPorTipoDeEspecialidad = (pacientes: Pacientes[], especialidad: Especialidad) => {
   return pacientes.reduce((totalPacientes, paciente) => {
     if(paciente.especialidad === especialidad) {
-      return totalPacientes++;
+      return totalPacientes + 1;
     } else {
       return totalPacientes;
     }
