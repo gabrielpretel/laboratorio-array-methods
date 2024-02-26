@@ -152,7 +152,7 @@ const contarPacientesPorTipoDeEspecialidad = (pacientes: Pacientes[], especialid
     } else {
       return totalPacientes;
     }
-  }, 0); // Aquí se añade el valor inicial para el acumulador
+  }, 0);
 };
 
 const cuentaPacientesPorEspecialidad = (
