@@ -112,16 +112,13 @@ console.log(activarProtocoloUrgencia(pacientes));
 const reasignaPacientesAMedicoFamilia = (
   pacientes: Pacientes[]
 ): Pacientes[] => {
-  const pacientesPediatria = pacientes.map((paciente): Pacientes => {
-    if (paciente.especialidad === "Pediatra") {
-      return {
-        ...paciente,
-        especialidad: "Medico de familia" as Especialidad,
-      };
-    } else {
-      return paciente;
-    }
-  });
+  const pacientesPediatria = pacientes.map(
+    (paciente: Pacientes): Pacientes =>
+      paciente.especialidad === "Pediatra"
+        ? { ...paciente, especialidad: "Medico de familia" as Especialidad }
+        : paciente
+  );
+
   return pacientesPediatria;
 };
 
@@ -129,11 +126,10 @@ console.log(reasignaPacientesAMedicoFamilia(pacientes));
 
 // Apartado 4
 
-const hayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
-  return pacientes.some(
+const hayPacientesDePediatria = (pacientes: Pacientes[]): boolean =>
+  pacientes.some(
     (pacientes: Pacientes): boolean => pacientes.especialidad === "Pediatra"
   );
-};
 
 console.log(hayPacientesDePediatria(pacientes));
 
@@ -145,15 +141,17 @@ interface NumeroPacientesPorEspecialidad {
   cardiologia: number;
 }
 
-const contarPacientesPorTipoDeEspecialidad = (pacientes: Pacientes[], especialidad: Especialidad) => {
-  return pacientes.reduce((totalPacientes, paciente) => {
-    if(paciente.especialidad === especialidad) {
-      return totalPacientes + 1;
-    } else {
-      return totalPacientes;
-    }
-  }, 0);
-};
+const contarPacientesPorTipoDeEspecialidad = (
+  pacientes: Pacientes[],
+  especialidad: Especialidad
+) =>
+  pacientes.reduce(
+    (totalPacientes: number, paciente: Pacientes): number =>
+      paciente.especialidad === especialidad
+        ? totalPacientes + 1
+        : totalPacientes,
+    0
+  );
 
 const cuentaPacientesPorEspecialidad = (
   pacientes: Pacientes[]
@@ -164,9 +162,18 @@ const cuentaPacientesPorEspecialidad = (
     cardiologia: 0,
   };
 
- pacientesPorEspecialidad.cardiologia = contarPacientesPorTipoDeEspecialidad(pacientes, "Cardiólogo");
- pacientesPorEspecialidad.medicoDeFamilia = contarPacientesPorTipoDeEspecialidad(pacientes, "Medico de familia");
- pacientesPorEspecialidad.pediatria = contarPacientesPorTipoDeEspecialidad(pacientes, "Pediatra");
+  pacientesPorEspecialidad.cardiologia = contarPacientesPorTipoDeEspecialidad(
+    pacientes,
+    "Cardiólogo"
+  );
+  pacientesPorEspecialidad.medicoDeFamilia = contarPacientesPorTipoDeEspecialidad(
+    pacientes,
+     "Medico de familia"
+  );
+  pacientesPorEspecialidad.pediatria = contarPacientesPorTipoDeEspecialidad(
+    pacientes,
+    "Pediatra"
+  );
 
   return pacientesPorEspecialidad;
 };
